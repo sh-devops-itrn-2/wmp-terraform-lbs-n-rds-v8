@@ -1,0 +1,10 @@
+variable "component" {}
+variable "env" {}
+variable "ports" {}
+variable "instance_type" {}
+variable "postgres_rds_address" {}
+variable "asg" {}
+variable "lb" {}
+variable "vpc_id" {}
+variable "subnets" {}
+variable "dns_domain" {}
