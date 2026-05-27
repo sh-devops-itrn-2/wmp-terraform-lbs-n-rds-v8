@@ -1,3 +1,13 @@
+module "databases" {
+  for_each = var.databases
+  source   = "./modules/rds"
+
+  env        = var.env
+  subnet_ids = var.subnets
+
+  allocated_storage = each.value["allocated_storage"]
+}
+
 module "apps" {
   depends_on = [module.databases]
   source     = "./modules/component-with-alb"
@@ -17,12 +27,3 @@ module "apps" {
   postgres_rds_address = module.databases["postgresql"].postgres_rds_address
 }
 
-module "databases" {
-  for_each = var.databases
-  source   = "./modules/rds"
-
-  env        = var.env
-  subnet_ids = var.subnets
-
-  allocated_storage = each.value["allocated_storage"]
-}
